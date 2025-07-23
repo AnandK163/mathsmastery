@@ -1,729 +1,713 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Math Learning App (Grades 6–10)</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafd; color: #222;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background: #34568B;
+      color: white;
+      padding: 1rem 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav {
+      background: #283e59;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    nav button {
+      background: transparent;
+      border: none;
+      color: white;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    nav button:hover, nav button.active {
+      background-color: #4A90E2;
+    }
+    main {
+      flex: 1 1 auto;
+      padding: 1rem 1rem 4rem;
+      max-width: 980px;
+      margin: auto;
+      width: 95%;
+    }
+    h2 {
+      color: #34568B;
+      margin-top: 0;
+    }
+    .hidden {
+      display: none;
+    }
+    /* Responsive columns */
+    .flex-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .card {
+      background: white;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      flex: 1 1 280px;
+    }
+    button.action-btn {
+      background-color: #34568B;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button.action-btn:hover {
+      background-color: #2a466d;
+    }
+    iframe.lesson-video {
+      width: 100%;
+      height: 220px;
+      border-radius: 6px;
+      border: none;
+    }
+    input[type="number"], input[type="text"] {
+      padding: 0.5rem;
+      margin: 0.3rem 0 0.7rem;
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    /* Quiz styles */
+    .quiz-question {
+      font-weight: 600;
+      margin: 0.75rem 0 0.5rem;
+    }
+    .options label {
+      display: block;
+      margin: 0.25rem 0;
+      cursor: pointer;
+    }
+    .options input {
+      margin-right: 0.5rem;
+    }
+    .quiz-feedback {
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    /* Score and badges */
+    .scoreboard, .badge-list {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #e6f0ff;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    /* Games container */
+    .game-container {
+      margin-top: 1rem;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      .flex-row {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Math Learning App (Grades 6–10)&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Reset and base */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #f9fafd; color: #222;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex; flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>a {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #007bff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>a:hover {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-decoration: underline;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #34568B;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #283e59;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-around;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: transparent;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: background-color 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>nav button:hover, nav button.active {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #4A90E2;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>main {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex: 1 1 auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem 1rem 4rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 980px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: auto;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 95%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h2 {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #34568B;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hidden {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Responsive columns */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.flex-row {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem 1.25rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>flex: 1 1 280px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.action-btn {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #34568B;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.5rem 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.action-btn:hover {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background-color: #2a466d;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>iframe.lesson-video {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 220px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>input[type="number"], input[type="text"] {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.3rem 0 0.7rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Quiz styles */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.quiz-question {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.75rem 0 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.options label {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0.25rem 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.options input {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-right: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.quiz-feedback {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 0.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Score and badges */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.scoreboard, .badge-list {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #e6f0ff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Games container */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.game-container {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 1rem;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* Responsive */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 600px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>nav {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.flex-row {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Math Learning App (Grades 6–10)</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;nav role="navigation" aria-label="Main Navigation"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button id="nav-home" class="active"&gt;Home&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button id="nav-lessons"&gt;Lessons&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button id="nav-quizzes"&gt;Quizzes&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button id="nav-games"&gt;Games&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button id="nav-real-life"&gt;Real-Life Applications&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/nav&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Home Page --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="page-home"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Welcome to the Math Learning App!&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;This app helps students from classes 6 to 10 learn mathematics interactively.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Visual &amp; Concept-based Lessons&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Fun Quizzes aligned with Telangana SSC curriculum&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Engaging Math Games to sharpen skills&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Explore how math applies to real life&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li&gt;Earn points and badges as you learn!&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Use the navigation above to start your learning journey.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Lessons Page --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="page-lessons" class="hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Lessons - Choose Your Class&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="flex-row" id="lesson-class-buttons"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Generated by JS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="lesson-content" style="margin-top:1rem;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Select a class to view lessons.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Quizzes Page --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="page-quizzes" class="hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Quizzes - Select Class and Chapter&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="quiz-class-select"&gt;Select Class:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="quiz-class-select" aria-label="Select Class for Quiz"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;!-- Options by JS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="quiz-chapter-select"&gt;Select Chapter:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="quiz-chapter-select" aria-label="Select Chapter for Quiz" disabled&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;option value=""&gt;Select class first&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="quiz-container" style="margin-top: 1rem;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Select class and chapter to start quiz.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scoreboard" aria-live="polite" id="quiz-score-board" hidden&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Score: &lt;span id="quiz-score"&gt;0&lt;/span&gt; / &lt;span id="quiz-total"&gt;&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Games Page --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="page-games" class="hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Math Games&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="games-list" class="flex-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Game cards generated below --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="game-active-container" style="margin-top:1rem;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Loaded game UI will appear here --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scoreboard" aria-live="polite" id="game-score-board" hidden&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Game Score: &lt;span id="game-score"&gt;0&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Real-Life Applications Page --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;section id="page-real-life" class="hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Real-Life Applications of Mathematics&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="real-life-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Shopping: Calculating Discounts&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>When you buy items during sales, you often get a discount percentage. For example, if a shirt costs ₹500 and has a 20% discount, you pay ₹500 - (20% of 500) = ₹400.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Sports: Scoring &amp; Averages&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Math helps in calculating batting averages in cricket or points per game in basketball to track player performance over time.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Travel: Speed and Distance&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Calculate how fast you need to drive to cover a distance in a given time using the formula distance = speed × time.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;Construction: Area and Volume&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Knowing geometry helps builders calculate how much paint is needed to cover a wall or how much concrete is required for a foundation.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;&lt;em&gt;More examples coming soon!&lt;/em&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/********************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* Navigation Setup *</p>
-<p class="p1"><span class="Apple-converted-space">     </span>********************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const navButtons = document.querySelectorAll('nav button');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const pages = {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>home: document.getElementById('page-home'),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lessons: document.getElementById('page-lessons'),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizzes: document.getElementById('page-quizzes'),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>games: document.getElementById('page-games'),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>realLife: document.getElementById('page-real-life'),</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function setActivePage(pageKey) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>Object.entries(pages).forEach(([key, el]) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>el.classList.toggle('hidden', key !== pageKey);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>navButtons.forEach(btn =&gt; btn.classList.toggle('active', btn.id === 'nav-' + pageKey));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>navButtons.forEach(btn =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>btn.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const pageKey = btn.id.replace('nav-', '');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setActivePage(pageKey);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (pageKey === 'lessons') renderLessonClassButtons();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (pageKey === 'quizzes') initQuizPage();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (pageKey === 'games') renderGameList();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/******************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* 1. Lessons - Class Buttons *</p>
-<p class="p1"><span class="Apple-converted-space">     </span>******************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const lessonClassContainer = document.getElementById('lesson-class-buttons');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const lessonContentContainer = document.getElementById('lesson-content');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderLessonClassButtons() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lessonClassContainer.innerHTML = '';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>['6', '7', '8', '9', '10'].forEach(cls =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const btn = document.createElement('button');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.className = 'action-btn';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.textContent = 'Class ' + cls;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.onclick = () =&gt; renderLessonContent(cls);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>lessonClassContainer.appendChild(btn);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lessonContentContainer.innerHTML = '&lt;p&gt;Select a class to view lessons.&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderLessonContent(cls) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (['6', '7', '8'].includes(cls)) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>lessonContentContainer.innerHTML = '&lt;p&gt;&lt;em&gt;Lessons for Class ' + cls + ' coming soon...&lt;/em&gt;&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Placeholder YouTube video links for classes 9 &amp; 10, update these later in this object</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const videoLinks = {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>'9': [</p>
-<p class="p1"><span class="Apple-converted-space">          </span>'https://www.youtube.com/embed/2JE5M8kajhA',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>'https://www.youtube.com/embed/z1n5hwr2OwI',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>'https://www.youtube.com/embed/IRX6rSP_p2w',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>],</p>
-<p class="p1"><span class="Apple-converted-space">        </span>'10': [</p>
-<p class="p1"><span class="Apple-converted-space">          </span>'https://www.youtube.com/embed/ePJO_2UV51Y',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>'https://www.youtube.com/embed/WD5BlsvRtz0',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>'https://www.youtube.com/embed/4jFlqekE6Xw',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>],</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Show one random video per class selection</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const vids = videoLinks[cls];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const randomVideo = vids[Math.floor(Math.random() * vids.length)];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>lessonContentContainer.innerHTML =</p>
-<p class="p1"><span class="Apple-converted-space">        </span>`&lt;iframe class="lesson-video" src="${randomVideo}" allowfullscreen title="Math Lesson Video"&gt;&lt;/iframe&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/*********************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* 2. Quizzes Section *</p>
-<p class="p1"><span class="Apple-converted-space">     </span>*********************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Sample quiz questions by class and chapter (Telangana SSC math topics placeholder)</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizzesData = {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>'6': {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>'Number Systems': [</p>
-<p class="p1"><span class="Apple-converted-space">          </span>{</p>
-<p class="p1"><span class="Apple-converted-space">            </span>question: 'What is the greatest common divisor (GCD) of 24 and 36?',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>options: ['6', '12', '18', '24'],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>answer: '12',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>},</p>
-<p class="p1"><span class="Apple-converted-space">          </span>{</p>
-<p class="p1"><span class="Apple-converted-space">            </span>question: 'Which of the following numbers is prime?',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>options: ['15', '21', '29', '35'],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>answer: '29',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>],</p>
-<p class="p1"><span class="Apple-converted-space">        </span>'Algebra': [</p>
-<p class="p1"><span class="Apple-converted-space">          </span>{</p>
-<p class="p1"><span class="Apple-converted-space">            </span>question: 'Solve for x: 2x + 3 = 11.',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>options: ['4', '5', '6', '7'],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>answer: '4',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>],</p>
-<p class="p1"><span class="Apple-converted-space">      </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>'9': {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>'Polynomials': [</p>
-<p class="p1"><span class="Apple-converted-space">          </span>{</p>
-<p class="p1"><span class="Apple-converted-space">            </span>question: 'What is the degree of polynomial 4x^3 + 2x^2 + x + 7?',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>options: ['1', '2', '3', '4'],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>answer: '3',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>},</p>
-<p class="p1"><span class="Apple-converted-space">          </span>{</p>
-<p class="p1"><span class="Apple-converted-space">            </span>question: 'Which of the following is a binomial?',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>options: ['5x + 3', 'x^2 + x + 1', 'x^3 + 2x^2 + x', '7'],</p>
-<p class="p1"><span class="Apple-converted-space">            </span>answer: '5x + 3',</p>
-<p class="p1"><span class="Apple-converted-space">          </span>},</p>
-<p class="p1"><span class="Apple-converted-space">        </span>],</p>
-<p class="p1"><span class="Apple-converted-space">      </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Add more classes and chapters and questions below as needed</p>
-<p class="p1"><span class="Apple-converted-space">    </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizClassSelect = document.getElementById('quiz-class-select');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizChapterSelect = document.getElementById('quiz-chapter-select');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizContainer = document.getElementById('quiz-container');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizScoreBoard = document.getElementById('quiz-score-board');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizScoreSpan = document.getElementById('quiz-score');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const quizTotalSpan = document.getElementById('quiz-total');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function initQuizPage() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Populate class dropdown</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizClassSelect.innerHTML = '&lt;option value=""&gt;Select Class&lt;/option&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>Object.keys(quizzesData).forEach(c =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizClassSelect.innerHTML += `&lt;option value="${c}"&gt;Class ${c}&lt;/option&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizChapterSelect.innerHTML = '&lt;option value=""&gt;Select class first&lt;/option&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizChapterSelect.disabled = true;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizContainer.innerHTML = '&lt;p&gt;Select class and chapter to start quiz.&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>quizClassSelect.addEventListener('change', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const cls = quizClassSelect.value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!cls) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizChapterSelect.disabled = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizChapterSelect.innerHTML = '&lt;option value=""&gt;Select class first&lt;/option&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizContainer.innerHTML = '&lt;p&gt;Select class and chapter to start quiz.&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizChapterSelect.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const chapters = Object.keys(quizzesData[cls] || {});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizChapterSelect.innerHTML = '&lt;option value=""&gt;Select Chapter&lt;/option&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>chapters.forEach(ch =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizChapterSelect.innerHTML += `&lt;option value="${ch}"&gt;${ch}&lt;/option&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizContainer.innerHTML = '&lt;p&gt;Select chapter to start quiz.&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>quizChapterSelect.addEventListener('change', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const cls = quizClassSelect.value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const ch = quizChapterSelect.value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!cls || !ch) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizContainer.innerHTML = '&lt;p&gt;Select class and chapter to start quiz.&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>startQuiz(quizzesData[cls][ch]);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>let currentQuiz, currentQuestionIndex, quizScore;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function startQuiz(questions) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>currentQuiz = questions;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>currentQuestionIndex = 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizScore = 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizTotalSpan.textContent = questions.length;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>renderQuestion();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderQuestion() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const q = currentQuiz[currentQuestionIndex];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>let optionsHtml = '';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>q.options.forEach((opt, i) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>optionsHtml += `</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="radio" name="quiz-option" value="${opt}" /&gt; ${opt}&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizContainer.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="quiz-question"&gt;${q.question}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="options"&gt;${optionsHtml}&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="action-btn" id="quiz-submit-btn" disabled&gt;Submit Answer&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="quiz-feedback" id="quiz-feedback"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizScoreBoard.hidden = false;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizScoreSpan.textContent = quizScore;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>const radios = quizContainer.querySelectorAll('input[name="quiz-option"]');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const submitBtn = document.getElementById('quiz-submit-btn');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>radios.forEach(radio =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>radio.addEventListener('change', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>submitBtn.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('quiz-feedback').textContent = '';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>submitBtn.onclick = () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>handleQuizAnswer();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function handleQuizAnswer() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const selected = quizContainer.querySelector('input[name="quiz-option"]:checked');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!selected) return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const userAnswer = selected.value;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const q = currentQuiz[currentQuestionIndex];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const feedback = document.getElementById('quiz-feedback');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (userAnswer === q.answer) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>feedback.textContent = 'Correct! ✅';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>quizScore++;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>feedback.textContent = `Incorrect! ❌ Correct answer: ${q.answer}`;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizScoreSpan.textContent = quizScore;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Disable options and submit button</p>
-<p class="p1"><span class="Apple-converted-space">      </span>quizContainer.querySelectorAll('input[name="quiz-option"]').forEach(i =&gt; i.disabled = true);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('quiz-submit-btn').disabled = true;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Move to next question or finish</p>
-<p class="p1"><span class="Apple-converted-space">      </span>currentQuestionIndex++;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (currentQuestionIndex &lt; currentQuiz.length) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; renderQuestion(), 1500);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>quizContainer.innerHTML = `&lt;p&gt;Quiz completed! Your score: ${quizScore} / ${currentQuiz.length}&lt;/p&gt;`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}, 1500);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/*********************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* 3. Games Section<span class="Apple-converted-space">    </span>*</p>
-<p class="p1"><span class="Apple-converted-space">     </span>*********************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Simple points stored in localStorage for gamification</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const gameScoreBoard = document.getElementById('game-score-board');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const gameScoreSpan = document.getElementById('game-score');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const gameActiveContainer = document.getElementById('game-active-container');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const gamesList = document.getElementById('games-list');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>let currentGameScore = 0;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// Game templates and logic</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const gamesData = [</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>id: 'arith-speed',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>title: 'Arithmetic Speed Game',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>description: 'Solve as many arithmetic problems as you can in 60 seconds.',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>start() {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.innerHTML = '';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreBoard.hidden = false;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>currentGameScore = 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreSpan.textContent = currentGameScore;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const timerElem = document.createElement('div');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>timerElem.style.fontWeight = 'bold';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>timerElem.style.marginBottom = '0.5rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.appendChild(timerElem);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const problemElem = document.createElement('div');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>problemElem.style.fontSize = '1.25rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>problemElem.style.marginBottom = '0.5rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.appendChild(problemElem);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const inputElem = document.createElement('input');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.type = 'number';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.placeholder = 'Your answer';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.style.fontSize = '1.2rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.style.padding = '0.5rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.style.width = '100%';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.appendChild(inputElem);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>let timeLeft = 60;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>timerElem.textContent = `Time Left: ${timeLeft}s`;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>let currentAnswer = 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>function nextProblem() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Random arithmetic: +, -, ×, ÷ (integers)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const ops = ['+', '-', '*', '/'];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const op = ops[Math.floor(Math.random() * ops.length)];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let a = Math.floor(Math.random() * 20) + 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let b = Math.floor(Math.random() * 20) + 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (op === '/') {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>// Adjust to ensure integer division</p>
-<p class="p1"><span class="Apple-converted-space">              </span>a = a * b;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>problemElem.textContent = `${a} ÷ ${b} = ?`;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>currentAnswer = a / b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else if (op === '*') {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>problemElem.textContent = `${a} × ${b} = ?`;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>currentAnswer = a * b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else if (op === '+') {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>problemElem.textContent = `${a} + ${b} = ?`;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>currentAnswer = a + b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>problemElem.textContent = `${a} - ${b} = ?`;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>currentAnswer = a - b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>inputElem.value = '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>inputElem.focus();</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const intervalId = setInterval(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>timeLeft--;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>timerElem.textContent = `Time Left: ${timeLeft}s`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (timeLeft &lt;= 0) {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>clearInterval(intervalId);</p>
-<p class="p1"><span class="Apple-converted-space">              </span>inputElem.disabled = true;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>problemElem.textContent = `Game Over! Your score: ${currentGameScore}`;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>saveGameScore(currentGameScore);</p>
-<p class="p1"><span class="Apple-converted-space">              </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}, 1000);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.addEventListener('keydown', e =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (e.key === 'Enter') {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>if (parseFloat(inputElem.value) === currentAnswer) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>currentGameScore++;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameScoreSpan.textContent = currentGameScore;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>}</p>
-<p class="p1"><span class="Apple-converted-space">              </span>nextProblem();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>nextProblem();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>id: 'equation-solver',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>title: 'Equation Solver Puzzle',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>description: 'Solve for x in simple linear equations.',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>start() {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.innerHTML = '';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreBoard.hidden = false;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>currentGameScore = 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreSpan.textContent = currentGameScore;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const problemElem = document.createElement('div');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>problemElem.style.fontSize = '1.25rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>problemElem.style.marginBottom = '0.5rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.appendChild(problemElem);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const inputElem = document.createElement('input');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.type = 'number';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.placeholder = 'Value of x';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.style.fontSize = '1.2rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.style.padding = '0.5rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.style.width = '100%';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.appendChild(inputElem);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>const feedbackElem = document.createElement('div');</p>
-<p class="p1"><span class="Apple-converted-space">          </span>feedbackElem.style.marginTop = '0.5rem';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>feedbackElem.style.fontWeight = '600';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.appendChild(feedbackElem);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>let currentAnswer;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>function nextEquation() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Generate ax + b = c form: a,b,c integers</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const a = Math.floor(Math.random() * 10) + 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const x = Math.floor(Math.random() * 20) - 5;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const b = Math.floor(Math.random() * 20) - 10;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const c = a * x + b;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>problemElem.textContent = `${a}x + ${b &gt;= 0 ? b : '('+b+')'} = ${c}`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>currentAnswer = x;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>inputElem.value = '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>inputElem.focus();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>feedbackElem.textContent = '';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>inputElem.addEventListener('keydown', e =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (e.key === 'Enter') {</p>
-<p class="p1"><span class="Apple-converted-space">              </span>const val = parseFloat(inputElem.value);</p>
-<p class="p1"><span class="Apple-converted-space">              </span>if (val === currentAnswer) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>feedbackElem.textContent = 'Correct! ✅';</p>
-<p class="p1"><span class="Apple-converted-space">                </span>currentGameScore++;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameScoreSpan.textContent = currentGameScore;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(nextEquation, 1000);</p>
-<p class="p1"><span class="Apple-converted-space">              </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>feedbackElem.textContent = 'Incorrect! Try again.';</p>
-<p class="p1"><span class="Apple-converted-space">              </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">          </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>nextEquation();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>id: 'geometry-builder',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>title: 'Geometry Shape Builder',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>description: 'Identify properties and build polygons.',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>start() {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.innerHTML = '';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreBoard.hidden = false;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>currentGameScore = 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreSpan.textContent = currentGameScore;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;This game is coming soon! Stay tuned for interactive geometry challenges.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>{</p>
-<p class="p1"><span class="Apple-converted-space">        </span>id: 'fraction-matching',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>title: 'Fraction Matching Game',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>description: 'Match equivalent fractions.',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>start() {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.innerHTML = '';</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreBoard.hidden = false;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>currentGameScore = 0;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreSpan.textContent = currentGameScore;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameActiveContainer.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;This game is coming soon! Practice matching equivalent fractions here.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>gameScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>},</p>
-<p class="p1"><span class="Apple-converted-space">      </span>},</p>
-<p class="p1"><span class="Apple-converted-space">    </span>];</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function renderGameList() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gamesList.innerHTML = '';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gamesData.forEach(g =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const card = document.createElement('div');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>card.className = 'card';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>card.innerHTML = `</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;${g.title}&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;${g.description}&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="action-btn" data-gameid="${g.id}"&gt;Play&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>gamesList.appendChild(card);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>gamesList.querySelectorAll('button').forEach(btn =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const id = btn.dataset.gameid;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const game = gamesData.find(g =&gt; g.id === id);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (game) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>game.start();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gameScoreBoard.hidden = false;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gameScoreBoard.hidden = true;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gameActiveContainer.innerHTML = '&lt;p&gt;Select a game to begin!&lt;/p&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function saveGameScore(score) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>// Save points to localStorage</p>
-<p class="p1"><span class="Apple-converted-space">      </span>let totalPoints = parseInt(localStorage.getItem('mathAppPoints')) || 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>totalPoints += score;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>localStorage.setItem('mathAppPoints', totalPoints);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>alert(`You earned ${score} points! Total Points: ${totalPoints}`);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>/*******************************</p>
-<p class="p1"><span class="Apple-converted-space">     </span>* On Load Initialization<span class="Apple-converted-space">      </span>*</p>
-<p class="p1"><span class="Apple-converted-space">     </span>*******************************/</p>
-<p class="p1"><span class="Apple-converted-space">    </span>setActivePage('home');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <header>
+    Math Learning App (Grades 6–10)
+  </header>
+  <nav role="navigation" aria-label="Main Navigation">
+    <button id="nav-home" class="active">Home</button>
+    <button id="nav-lessons">Lessons</button>
+    <button id="nav-quizzes">Quizzes</button>
+    <button id="nav-games">Games</button>
+    <button id="nav-real-life">Real-Life Applications</button>
+  </nav>
+  <main>
+    <!-- Home Page -->
+    <section id="page-home">
+      <h2>Welcome to the Math Learning App!</h2>
+      <p>This app helps students from classes 6 to 10 learn mathematics interactively.</p>
+      <ul>
+        <li>Visual & Concept-based Lessons</li>
+        <li>Fun Quizzes aligned with Telangana SSC curriculum</li>
+        <li>Engaging Math Games to sharpen skills</li>
+        <li>Explore how math applies to real life</li>
+        <li>Earn points and badges as you learn!</li>
+      </ul>
+      <p>Use the navigation above to start your learning journey.</p>
+    </section>
+
+    <!-- Lessons Page -->
+    <section id="page-lessons" class="hidden">
+      <h2>Lessons - Choose Your Class</h2>
+      <div class="flex-row" id="lesson-class-buttons">
+        <!-- Generated by JS -->
+      </div>
+      <div id="lesson-content" style="margin-top:1rem;">
+        <p>Select a class to view lessons.</p>
+      </div>
+    </section>
+
+    <!-- Quizzes Page -->
+    <section id="page-quizzes" class="hidden">
+      <h2>Quizzes - Select Class and Chapter</h2>
+      <div>
+        <label for="quiz-class-select">Select Class:</label>
+        <select id="quiz-class-select" aria-label="Select Class for Quiz">
+          <!-- Options by JS -->
+        </select>
+      </div>
+      <div>
+        <label for="quiz-chapter-select">Select Chapter:</label>
+        <select id="quiz-chapter-select" aria-label="Select Chapter for Quiz" disabled>
+          <option value="">Select class first</option>
+        </select>
+      </div>
+      <div id="quiz-container" style="margin-top: 1rem;">
+        <p>Select class and chapter to start quiz.</p>
+      </div>
+      <div class="scoreboard" aria-live="polite" id="quiz-score-board" hidden>
+        Score: <span id="quiz-score">0</span> / <span id="quiz-total"></span>
+      </div>
+    </section>
+
+    <!-- Games Page -->
+    <section id="page-games" class="hidden">
+      <h2>Math Games</h2>
+      <div id="games-list" class="flex-row">
+        <!-- Game cards generated below -->
+      </div>
+      <div id="game-active-container" style="margin-top:1rem;">
+        <!-- Loaded game UI will appear here -->
+      </div>
+      <div class="scoreboard" aria-live="polite" id="game-score-board" hidden>
+        Game Score: <span id="game-score">0</span>
+      </div>
+    </section>
+
+    <!-- Real-Life Applications Page -->
+    <section id="page-real-life" class="hidden">
+      <h2>Real-Life Applications of Mathematics</h2>
+      <div id="real-life-content">
+        <article>
+          <h3>Shopping: Calculating Discounts</h3>
+          <p>
+            When you buy items during sales, you often get a discount percentage. For example, if a shirt costs ₹500 and has a 20% discount, you pay ₹500 - (20% of 500) = ₹400.
+          </p>
+        </article>
+        <article>
+          <h3>Sports: Scoring & Averages</h3>
+          <p>
+            Math helps in calculating batting averages in cricket or points per game in basketball to track player performance over time.
+          </p>
+        </article>
+        <article>
+          <h3>Travel: Speed and Distance</h3>
+          <p>
+            Calculate how fast you need to drive to cover a distance in a given time using the formula distance = speed × time.
+          </p>
+        </article>
+        <article>
+          <h3>Construction: Area and Volume</h3>
+          <p>
+            Knowing geometry helps builders calculate how much paint is needed to cover a wall or how much concrete is required for a foundation.
+          </p>
+        </article>
+        <p><em>More examples coming soon!</em></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /********************
+     * Navigation Setup *
+     ********************/
+    const navButtons = document.querySelectorAll('nav button');
+    const pages = {
+      home: document.getElementById('page-home'),
+      lessons: document.getElementById('page-lessons'),
+      quizzes: document.getElementById('page-quizzes'),
+      games: document.getElementById('page-games'),
+      realLife: document.getElementById('page-real-life'),
+    };
+    function setActivePage(pageKey) {
+      Object.entries(pages).forEach(([key, el]) => {
+        el.classList.toggle('hidden', key !== pageKey);
+      });
+      navButtons.forEach(btn => btn.classList.toggle('active', btn.id === 'nav-' + pageKey));
+    }
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pageKey = btn.id.replace('nav-', '');
+        setActivePage(pageKey);
+        if (pageKey === 'lessons') renderLessonClassButtons();
+        if (pageKey === 'quizzes') initQuizPage();
+        if (pageKey === 'games') renderGameList();
+      });
+    });
+
+    /******************************
+     * 1. Lessons - Class Buttons *
+     ******************************/
+    const lessonClassContainer = document.getElementById('lesson-class-buttons');
+    const lessonContentContainer = document.getElementById('lesson-content');
+
+    function renderLessonClassButtons() {
+      lessonClassContainer.innerHTML = '';
+      ['6', '7', '8', '9', '10'].forEach(cls => {
+        const btn = document.createElement('button');
+        btn.className = 'action-btn';
+        btn.textContent = 'Class ' + cls;
+        btn.onclick = () => renderLessonContent(cls);
+        lessonClassContainer.appendChild(btn);
+      });
+      lessonContentContainer.innerHTML = '<p>Select a class to view lessons.</p>';
+    }
+
+    function renderLessonContent(cls) {
+      if (['6', '7', '8'].includes(cls)) {
+        lessonContentContainer.innerHTML = '<p><em>Lessons for Class ' + cls + ' coming soon...</em></p>';
+        return;
+      }
+      // Placeholder YouTube video links for classes 9 & 10, update these later in this object
+      const videoLinks = {
+        '9': [
+          'https://www.youtube.com/embed/2JE5M8kajhA',
+          'https://www.youtube.com/embed/z1n5hwr2OwI',
+          'https://www.youtube.com/embed/IRX6rSP_p2w',
+        ],
+        '10': [
+          'https://www.youtube.com/embed/ePJO_2UV51Y',
+          'https://www.youtube.com/embed/WD5BlsvRtz0',
+          'https://www.youtube.com/embed/4jFlqekE6Xw',
+        ],
+      };
+      // Show one random video per class selection
+      const vids = videoLinks[cls];
+      const randomVideo = vids[Math.floor(Math.random() * vids.length)];
+      lessonContentContainer.innerHTML =
+        `<iframe class="lesson-video" src="${randomVideo}" allowfullscreen title="Math Lesson Video"></iframe>`;
+    }
+
+    /*********************
+     * 2. Quizzes Section *
+     *********************/
+    // Sample quiz questions by class and chapter (Telangana SSC math topics placeholder)
+    const quizzesData = {
+      '6': {
+        'Number Systems': [
+          {
+            question: 'What is the greatest common divisor (GCD) of 24 and 36?',
+            options: ['6', '12', '18', '24'],
+            answer: '12',
+          },
+          {
+            question: 'Which of the following numbers is prime?',
+            options: ['15', '21', '29', '35'],
+            answer: '29',
+          },
+        ],
+        'Algebra': [
+          {
+            question: 'Solve for x: 2x + 3 = 11.',
+            options: ['4', '5', '6', '7'],
+            answer: '4',
+          },
+        ],
+      },
+      '9': {
+        'Polynomials': [
+          {
+            question: 'What is the degree of polynomial 4x^3 + 2x^2 + x + 7?',
+            options: ['1', '2', '3', '4'],
+            answer: '3',
+          },
+          {
+            question: 'Which of the following is a binomial?',
+            options: ['5x + 3', 'x^2 + x + 1', 'x^3 + 2x^2 + x', '7'],
+            answer: '5x + 3',
+          },
+        ],
+      },
+      // Add more classes and chapters and questions below as needed
+    };
+
+    const quizClassSelect = document.getElementById('quiz-class-select');
+    const quizChapterSelect = document.getElementById('quiz-chapter-select');
+    const quizContainer = document.getElementById('quiz-container');
+    const quizScoreBoard = document.getElementById('quiz-score-board');
+    const quizScoreSpan = document.getElementById('quiz-score');
+    const quizTotalSpan = document.getElementById('quiz-total');
+
+    function initQuizPage() {
+      // Populate class dropdown
+      quizClassSelect.innerHTML = '<option value="">Select Class</option>';
+      Object.keys(quizzesData).forEach(c => {
+        quizClassSelect.innerHTML += `<option value="${c}">Class ${c}</option>`;
+      });
+      quizChapterSelect.innerHTML = '<option value="">Select class first</option>';
+      quizChapterSelect.disabled = true;
+      quizContainer.innerHTML = '<p>Select class and chapter to start quiz.</p>';
+      quizScoreBoard.hidden = true;
+    }
+
+    quizClassSelect.addEventListener('change', () => {
+      const cls = quizClassSelect.value;
+      if (!cls) {
+        quizChapterSelect.disabled = true;
+        quizChapterSelect.innerHTML = '<option value="">Select class first</option>';
+        quizContainer.innerHTML = '<p>Select class and chapter to start quiz.</p>';
+        quizScoreBoard.hidden = true;
+        return;
+      }
+      quizChapterSelect.disabled = false;
+      const chapters = Object.keys(quizzesData[cls] || {});
+      quizChapterSelect.innerHTML = '<option value="">Select Chapter</option>';
+      chapters.forEach(ch => {
+        quizChapterSelect.innerHTML += `<option value="${ch}">${ch}</option>`;
+      });
+      quizContainer.innerHTML = '<p>Select chapter to start quiz.</p>';
+      quizScoreBoard.hidden = true;
+    });
+
+    quizChapterSelect.addEventListener('change', () => {
+      const cls = quizClassSelect.value;
+      const ch = quizChapterSelect.value;
+      if (!cls || !ch) {
+        quizContainer.innerHTML = '<p>Select class and chapter to start quiz.</p>';
+        quizScoreBoard.hidden = true;
+        return;
+      }
+      startQuiz(quizzesData[cls][ch]);
+    });
+
+    let currentQuiz, currentQuestionIndex, quizScore;
+
+    function startQuiz(questions) {
+      currentQuiz = questions;
+      currentQuestionIndex = 0;
+      quizScore = 0;
+      quizTotalSpan.textContent = questions.length;
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = currentQuiz[currentQuestionIndex];
+      let optionsHtml = '';
+      q.options.forEach((opt, i) => {
+        optionsHtml += `
+          <label><input type="radio" name="quiz-option" value="${opt}" /> ${opt}</label>
+        `;
+      });
+      quizContainer.innerHTML = `
+        <div class="quiz-question">${q.question}</div>
+        <div class="options">${optionsHtml}</div>
+        <button class="action-btn" id="quiz-submit-btn" disabled>Submit Answer</button>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+      `;
+      quizScoreBoard.hidden = false;
+      quizScoreSpan.textContent = quizScore;
+
+      const radios = quizContainer.querySelectorAll('input[name="quiz-option"]');
+      const submitBtn = document.getElementById('quiz-submit-btn');
+      radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          submitBtn.disabled = false;
+          document.getElementById('quiz-feedback').textContent = '';
+        });
+      });
+      submitBtn.onclick = () => {
+        handleQuizAnswer();
+      };
+    }
+
+    function handleQuizAnswer() {
+      const selected = quizContainer.querySelector('input[name="quiz-option"]:checked');
+      if (!selected) return;
+      const userAnswer = selected.value;
+      const q = currentQuiz[currentQuestionIndex];
+      const feedback = document.getElementById('quiz-feedback');
+      if (userAnswer === q.answer) {
+        feedback.textContent = 'Correct! ✅';
+        quizScore++;
+      } else {
+        feedback.textContent = `Incorrect! ❌ Correct answer: ${q.answer}`;
+      }
+      quizScoreSpan.textContent = quizScore;
+      // Disable options and submit button
+      quizContainer.querySelectorAll('input[name="quiz-option"]').forEach(i => i.disabled = true);
+      document.getElementById('quiz-submit-btn').disabled = true;
+
+      // Move to next question or finish
+      currentQuestionIndex++;
+      if (currentQuestionIndex < currentQuiz.length) {
+        setTimeout(() => renderQuestion(), 1500);
+      } else {
+        setTimeout(() => {
+          quizContainer.innerHTML = `<p>Quiz completed! Your score: ${quizScore} / ${currentQuiz.length}</p>`;
+        }, 1500);
+      }
+    }
+
+    /*********************
+     * 3. Games Section    *
+     *********************/
+    // Simple points stored in localStorage for gamification
+    const gameScoreBoard = document.getElementById('game-score-board');
+    const gameScoreSpan = document.getElementById('game-score');
+    const gameActiveContainer = document.getElementById('game-active-container');
+    const gamesList = document.getElementById('games-list');
+
+    let currentGameScore = 0;
+
+    // Game templates and logic
+    const gamesData = [
+      {
+        id: 'arith-speed',
+        title: 'Arithmetic Speed Game',
+        description: 'Solve as many arithmetic problems as you can in 60 seconds.',
+        start() {
+          gameActiveContainer.innerHTML = '';
+          gameScoreBoard.hidden = false;
+          currentGameScore = 0;
+          gameScoreSpan.textContent = currentGameScore;
+
+          const timerElem = document.createElement('div');
+          timerElem.style.fontWeight = 'bold';
+          timerElem.style.marginBottom = '0.5rem';
+          gameActiveContainer.appendChild(timerElem);
+
+          const problemElem = document.createElement('div');
+          problemElem.style.fontSize = '1.25rem';
+          problemElem.style.marginBottom = '0.5rem';
+          gameActiveContainer.appendChild(problemElem);
+
+          const inputElem = document.createElement('input');
+          inputElem.type = 'number';
+          inputElem.placeholder = 'Your answer';
+          inputElem.style.fontSize = '1.2rem';
+          inputElem.style.padding = '0.5rem';
+          inputElem.style.width = '100%';
+          gameActiveContainer.appendChild(inputElem);
+
+          let timeLeft = 60;
+          timerElem.textContent = `Time Left: ${timeLeft}s`;
+
+          let currentAnswer = 0;
+          function nextProblem() {
+            // Random arithmetic: +, -, ×, ÷ (integers)
+            const ops = ['+', '-', '*', '/'];
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            let a = Math.floor(Math.random() * 20) + 1;
+            let b = Math.floor(Math.random() * 20) + 1;
+            if (op === '/') {
+              // Adjust to ensure integer division
+              a = a * b;
+              problemElem.textContent = `${a} ÷ ${b} = ?`;
+              currentAnswer = a / b;
+            } else if (op === '*') {
+              problemElem.textContent = `${a} × ${b} = ?`;
+              currentAnswer = a * b;
+            } else if (op === '+') {
+              problemElem.textContent = `${a} + ${b} = ?`;
+              currentAnswer = a + b;
+            } else {
+              problemElem.textContent = `${a} - ${b} = ?`;
+              currentAnswer = a - b;
+            }
+            inputElem.value = '';
+            inputElem.focus();
+          }
+
+          const intervalId = setInterval(() => {
+            timeLeft--;
+            timerElem.textContent = `Time Left: ${timeLeft}s`;
+            if (timeLeft <= 0) {
+              clearInterval(intervalId);
+              inputElem.disabled = true;
+              problemElem.textContent = `Game Over! Your score: ${currentGameScore}`;
+              saveGameScore(currentGameScore);
+              return;
+            }
+          }, 1000);
+
+          inputElem.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+              if (parseFloat(inputElem.value) === currentAnswer) {
+                currentGameScore++;
+                gameScoreSpan.textContent = currentGameScore;
+              }
+              nextProblem();
+            }
+          });
+
+          nextProblem();
+        },
+      },
+      {
+        id: 'equation-solver',
+        title: 'Equation Solver Puzzle',
+        description: 'Solve for x in simple linear equations.',
+        start() {
+          gameActiveContainer.innerHTML = '';
+          gameScoreBoard.hidden = false;
+          currentGameScore = 0;
+          gameScoreSpan.textContent = currentGameScore;
+
+          const problemElem = document.createElement('div');
+          problemElem.style.fontSize = '1.25rem';
+          problemElem.style.marginBottom = '0.5rem';
+          gameActiveContainer.appendChild(problemElem);
+
+          const inputElem = document.createElement('input');
+          inputElem.type = 'number';
+          inputElem.placeholder = 'Value of x';
+          inputElem.style.fontSize = '1.2rem';
+          inputElem.style.padding = '0.5rem';
+          inputElem.style.width = '100%';
+          gameActiveContainer.appendChild(inputElem);
+
+          const feedbackElem = document.createElement('div');
+          feedbackElem.style.marginTop = '0.5rem';
+          feedbackElem.style.fontWeight = '600';
+          gameActiveContainer.appendChild(feedbackElem);
+
+          let currentAnswer;
+          function nextEquation() {
+            // Generate ax + b = c form: a,b,c integers
+            const a = Math.floor(Math.random() * 10) + 1;
+            const x = Math.floor(Math.random() * 20) - 5;
+            const b = Math.floor(Math.random() * 20) - 10;
+            const c = a * x + b;
+            problemElem.textContent = `${a}x + ${b >= 0 ? b : '('+b+')'} = ${c}`;
+            currentAnswer = x;
+            inputElem.value = '';
+            inputElem.focus();
+            feedbackElem.textContent = '';
+          }
+
+          inputElem.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+              const val = parseFloat(inputElem.value);
+              if (val === currentAnswer) {
+                feedbackElem.textContent = 'Correct! ✅';
+                currentGameScore++;
+                gameScoreSpan.textContent = currentGameScore;
+                setTimeout(nextEquation, 1000);
+              } else {
+                feedbackElem.textContent = 'Incorrect! Try again.';
+              }
+            }
+          });
+
+          nextEquation();
+        },
+      },
+      {
+        id: 'geometry-builder',
+        title: 'Geometry Shape Builder',
+        description: 'Identify properties and build polygons.',
+        start() {
+          gameActiveContainer.innerHTML = '';
+          gameScoreBoard.hidden = false;
+          currentGameScore = 0;
+          gameScoreSpan.textContent = currentGameScore;
+
+          gameActiveContainer.innerHTML = `
+            <p>This game is coming soon! Stay tuned for interactive geometry challenges.</p>
+          `;
+          gameScoreBoard.hidden = true;
+        },
+      },
+      {
+        id: 'fraction-matching',
+        title: 'Fraction Matching Game',
+        description: 'Match equivalent fractions.',
+        start() {
+          gameActiveContainer.innerHTML = '';
+          gameScoreBoard.hidden = false;
+          currentGameScore = 0;
+          gameScoreSpan.textContent = currentGameScore;
+
+          gameActiveContainer.innerHTML = `
+            <p>This game is coming soon! Practice matching equivalent fractions here.</p>
+          `;
+          gameScoreBoard.hidden = true;
+        },
+      },
+    ];
+
+    function renderGameList() {
+      gamesList.innerHTML = '';
+      gamesData.forEach(g => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${g.title}</h3>
+          <p>${g.description}</p>
+          <button class="action-btn" data-gameid="${g.id}">Play</button>
+        `;
+        gamesList.appendChild(card);
+      });
+
+      gamesList.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.gameid;
+          const game = gamesData.find(g => g.id === id);
+          if (game) {
+            game.start();
+            gameScoreBoard.hidden = false;
+          }
+        });
+      });
+      gameScoreBoard.hidden = true;
+      gameActiveContainer.innerHTML = '<p>Select a game to begin!</p>';
+    }
+
+    function saveGameScore(score) {
+      // Save points to localStorage
+      let totalPoints = parseInt(localStorage.getItem('mathAppPoints')) || 0;
+      totalPoints += score;
+      localStorage.setItem('mathAppPoints', totalPoints);
+      alert(`You earned ${score} points! Total Points: ${totalPoints}`);
+    }
+
+    /*******************************
+     * On Load Initialization      *
+     *******************************/
+    setActivePage('home');
+  </script>
 </body>
 </html>
