@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathLearn - Interactive Math Education for Grades 6-10</title>
-    <meta name="description" content="Learn mathematics through interactive lessons, quizzes, games, and real-life applications. Designed for students in grades 6-10.">
+    <title>Math Games - MathLearn</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/store.js"></script>
@@ -20,10 +19,10 @@
                         Math<span class="text-accent">Learn</span>
                     </a>
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="index.html" class="nav-link active">Home</a>
+                        <a href="index.html" class="nav-link">Home</a>
                         <a href="lessons.html" class="nav-link">Lessons</a>
                         <a href="quizzes.html" class="nav-link">Quizzes</a>
-                        <a href="games.html" class="nav-link">Games</a>
+                        <a href="games.html" class="nav-link active">Games</a>
                         <a href="applications.html" class="nav-link">Applications</a>
                     </div>
                 </div>
@@ -42,10 +41,10 @@
             <!-- Mobile menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <div class="space-y-2">
-                    <a href="index.html" class="mobile-nav-link active">Home</a>
+                    <a href="index.html" class="mobile-nav-link">Home</a>
                     <a href="lessons.html" class="mobile-nav-link">Lessons</a>
                     <a href="quizzes.html" class="mobile-nav-link">Quizzes</a>
-                    <a href="games.html" class="mobile-nav-link">Games</a>
+                    <a href="games.html" class="mobile-nav-link active">Games</a>
                     <a href="applications.html" class="mobile-nav-link">Applications</a>
                 </div>
             </div>
@@ -53,33 +52,43 @@
     </nav>
 
     <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="relative py-20 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-hero opacity-10"></div>
-            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
-                <div class="animate-bounce-in">
-                    <h1 class="text-4xl md:text-6xl font-bold text-foreground mb-6">
-                        Learn Math the 
-                        <span class="text-transparent bg-clip-text bg-gradient-hero">Fun Way</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-                        Interactive lessons, engaging quizzes, and exciting games designed for students in grades 6-10
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="lessons.html">
-                            <button class="btn btn-hero min-w-48">Start Learning</button>
-                        </a>
-                        <a href="games.html">
-                            <button class="btn btn-outline min-w-48">Play Games</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                Math <span class="text-transparent bg-clip-text bg-gradient-accent">Games</span>
+            </h1>
+            <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Learn mathematics through fun and engaging games that make practice enjoyable
+            </p>
+        </div>
 
-        <!-- Continue with rest of content... -->
-        <script src="js/home.js"></script>
+        <!-- Game Selection -->
+        <div id="game-selection" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Games will be populated by JavaScript -->
+        </div>
+
+        <!-- Game Player -->
+        <div id="game-player" class="hidden">
+            <button id="back-to-games" class="btn btn-outline mb-6">
+                ← Back to Games
+            </button>
+            
+            <div id="game-content">
+                <!-- Game content will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Instructions for adding new games -->
+        <div class="mt-16 p-6 bg-muted/50 rounded-lg border border-dashed border-border">
+            <h3 class="text-lg font-semibold mb-2">🎮 Add New Games</h3>
+            <p class="text-muted-foreground text-sm">
+                To add new games: Add them to the <code>games</code> array in <code>js/games.js</code>. 
+                Each game should have a unique ID, title, description, and render function.
+            </p>
+        </div>
     </main>
+
+    <script src="js/games.js"></script>
 </body>
 </html>
