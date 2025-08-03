@@ -333,6 +333,14 @@ export const chapterData = {
             points: 50,
             videoUrl: "https://www.youtube.com/embed/cbM9j6TCPvE",
             topics: ["Identities", "Problem Solving"]
+        },
+        {
+            id: "ch10",
+            title: "Geometry Basics",
+            description: "Introduction to lines and angles.",
+            points: 50,
+            videoUrl: "https://youtu.be/ncg2GSxYxZw?si=REK_jLIlx61N1j39",
+            topics: ["Lines", "Angles"]
         }
     ],
     8: [
